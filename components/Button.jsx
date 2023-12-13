@@ -1,21 +1,24 @@
 import React from 'react';
 import { tableBody } from './tbody';
 import NewUserForm from './UserForm';
+import UserForm from './UserForm';
 
-const Button = ({ children, bg, index, setTable, table, action, addItem }) => {
+const Button = ({ children, bg, index, setTable, table, action ,setUserForm}) => {
   const buttonHandler = () => {
     if (action === "delete") {
       const updatedTable = [...table];
       updatedTable.splice(index, 1);
       setTable(updatedTable);
+      
     } else if (action === "edit") {
-      addItem();
+    setUserForm(true)
+   
       
     }
   };
 
   return (
-    <button onClick={buttonHandler} className={`${bg} rounded-xl px-2 py-1 text-white`}>
+    <button onClick={buttonHandler} className={`${bg} rounded-md px-2 py-1  text-white`}>
       {children}
     </button>
   );
