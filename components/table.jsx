@@ -3,8 +3,45 @@ import { tableHead } from "./thead";
 import { tableBody } from "./tbody";
 import Image from "next/image";
 import Button from "./Button";
+import NewUserForm from "./UserForm";
 
 const Table = () => {
+
+  const [userForm,setUserForm]=useState(true)
+
+  const [newUser,setNewUser]=useState();
+
+  const onSubmit = (values, { resetForm }) => {
+    // Form gönderildiğinde yapılacak işlemler buraya gelecek
+    console.log("Form Gönderildi", values);
+    
+    // Verileri state'e aktar
+    setNewUser(values);
+
+    // Formu sıfırla
+    resetForm();
+  };
+
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    department: "",
+    company: "",
+    currentPassword: "",
+    newPassword: ""
+  };
+
+
+  const newItem = {
+    img: "/images/neil-sims.png",
+    name: "ahmet",
+    email: "asdf@windster.com",
+    position: "Fdsfat-end developer",
+    country: "United States",
+    status: "active"
+  };
   const [tableData, setTableData] = useState([
     {
         img:"/images/neil-sims.png",
@@ -12,19 +49,20 @@ const Table = () => {
         email:"neil.sims@windster.com",
         position:"Front-end developer",
         country:"United States",
-        status:"active"
-    },
-    {
-        img:"/images/neil-sims.png",
-        name:"asdfs",
-        email:"asdf@windster.com",
-        position:"Fdsfat-end developer",
-        country:"United States",
-        status:"active"
-    },]);
+        status:"active",
+        pasword:""
+    }]);
+
+    const addItem=()=>{
+             
+        setTableData([...tableData, newItem]);
+      
+    }
+    
   console.log(tableData);
   return (
     <div className="m-16">
+      {userForm===true&&<NewUserForm/>}
       <table className="table-auto w-full     ">
         <thead className="bg-gray-300 w-full  ">
           <tr className=" ">
@@ -65,10 +103,10 @@ const Table = () => {
               <td>{table.country}</td>
               <td>{table.status}</td>
               <td className="w-[12%]">
-                <Button index={index} table={tableData} setTable={setTableData} bg={"bg-blue-600"}>
+                <Button index={index} newItem={newItem} table={tableData} addItem={addItem} action="edit" setTable={setTableData} bg={"bg-blue-600"}>
                   Edit user
                 </Button>
-                <Button bg={"bg-red-600"} table={tableData} setTable={setTableData}>
+                <Button bg={"bg-red-600"} table={tableData} action="delete" setTable={setTableData}>
                   Delete user
                 </Button>
               </td>
