@@ -1,3 +1,3 @@
 export const tableHead=[
-  "NAME", "POSITION","COUNTRY","STATUS",
+  "NAME", "POSITION","COUNTRY","STATUS","PRICE"
 ]

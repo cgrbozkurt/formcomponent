@@ -1,74 +1,64 @@
 export let tableBody=[
-    {
-        img:"/images/neil-sims.png",
-        name:"ahmet",
-        email:"neil.sims@windster.com",
-        position:"Front-end developer",
-        country:"United States",
-        status:"active"
-    },
-    {
-        img:"/images/neil-sims.png",
-        name:"asdfs",
-        email:"asdf@windster.com",
-        position:"Fdsfat-end developer",
-        country:"United States",
-        status:"active"
-    },
-    {
-        img:"/images/neil-sims.png",
-        name:"Neil Sims",
-        email:"neil.sims@windster.com",
-        position:"Front-end developer",
-        country:"United States",
-        status:"active"
-    },
-    {
-        img:"/images/neil-sims.png",
-        name:"Neil Sims",
-        email:"neil.sims@windster.com",
-        position:"Front-end developer",
-        country:"United States",
-        status:"active"
-    },
-    {
-        img:"/images/neil-sims.png",
-        name:"Neil Sims",
-        email:"neil.sims@windster.com",
-        position:"Front-end developer",
-        country:"United States",
-        status:"active"
-    },
-    {
-        img:"/images/neil-sims.png",
-        name:"Neil Sims",
-        email:"neil.sims@windster.com",
-        position:"Front-end developer",
-        country:"United States",
-        status:"active"
-    },
-    {
-        img:"/images/neil-sims.png",
-        name:"Neil Sims",
-        email:"neil.sims@windster.com",
-        position:"Front-end developer",
-        country:"United States",
-        status:"active"
-    },
-    {
-        img:"/images/neil-sims.png",
-        name:"Neil Sims",
-        email:"neil.sims@windster.com",
-        position:"Front-end developer",
-        country:"United States",
-        status:"active"
-    },
-    {
-        img:"/images/neil-sims.png",
-        name:"Neil Sims",
-        email:"neil.sims@windster.com",
-        position:"Front-end developer",
-        country:"United States",
-        status:"active"
-    },
+    
+        {
+          img: "/images/neil-sims.png",
+          name: "mehmet",
+          lastName: "asdf",
+          email: "asdf@gmail.com",
+          phoneNumber: "asdf",
+          department: "fasd",
+          company: "adsf",
+          currentPassword: "asdf",
+          newPassword: "asdf",
+          position: "front-end developer",
+          country: "United States",
+          status: "active",
+          price: 2,
+        },
+        {
+          img: "/images/neil-sims.png",
+          name: "amehmet",
+          lastName: "asdf",
+          email: "asdf@gmail.com",
+          phoneNumber: "asdf",
+          department: "fasd",
+          company: "adsf",
+          currentPassword: "asdf",
+          newPassword: "asdf",
+          position: "ufront-end developer",
+          country: "ğUnited States",
+          status: "kactive",
+          price: 35,
+        },
+        {
+          img: "/images/neil-sims.png",
+          name: "nmehmet",
+          lastName: "asdf",
+          email: "asdf@gmail.com",
+          phoneNumber: "asdf",
+          department: "fasd",
+          company: "adsf",
+          currentPassword: "asdf",
+          newPassword: "asdf",
+          position: "tfront-end developer",
+          country: "yUnited States",
+          status: "jactive",
+          price: 15,
+        },
+        {
+          img: "/images/neil-sims.png",
+          name: "bmehmet",
+          lastName: "asdf",
+          email: "asdf@gmail.com",
+          phoneNumber: "asdf",
+          department: "fasd",
+          company: "adsf",
+          currentPassword: "asdf",
+          newPassword: "asdf",
+          position: "afront-end developer",
+          country: "xUnited States",
+          status: "gactive",
+          price: 1,
+        },
+      
 ]
