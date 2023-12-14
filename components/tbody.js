@@ -17,7 +17,7 @@ export let tableBody=[
         },
         {
           img: "/images/neil-sims.png",
-          name: "amehmet",
+          name: "hüseyin",
           lastName: "asdf",
           email: "asdf@gmail.com",
           phoneNumber: "asdf",
