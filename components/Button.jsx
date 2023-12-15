@@ -1,21 +1,16 @@
 import React from 'react';
-import { tableBody } from './tbody';
-import NewUserForm from './UserForm';
-import UserForm from './UserForm';
 
-const Button = ({ children, bg, index, setTableData, table, action ,setUserForm}) => {
+const Button = ({ children, bg, id, setTableData, tableData, action, setUserForm }) => {
   const buttonHandler = () => {
     if (action === "delete") {
-      const updatedTable = [...table];
-      updatedTable.splice(index, 1);
-      setTableData(updatedTable);
-      
+      const selectedIds = [id]; // Silinecek öğenin benzersiz tanımlayıcısı id ise
+      const newTableData = tableData.filter(item => !selectedIds.includes(item.id));
+      setTableData(newTableData);
     } else if (action === "edit") {
-    setUserForm(true)
-        }
-        else if(action==="add"){
-          setUserForm(true)
-        }
+      setUserForm(true);
+    } else if (action === "add") {
+      setUserForm(true);
+    }
   };
 
   return (

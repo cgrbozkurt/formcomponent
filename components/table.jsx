@@ -1,66 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { tableHead } from "./thead";
 import { TbArrowsSort } from "react-icons/tb";
-import { tableBody } from "./tbody";
 import Tabletd from "./Tabletd";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import styles from "../styles/animation.module.css";
+import { tableBody } from "./tbody";
 
 const Table = ({ search, setUserForm }) => {
-  // Sıralama durumu ve tablo verisi için state'leri tanımla
   const [sortOrder, setSortOrder] = useState("asc");
   const [tableData, setTableData] = useState(tableBody);
-
-  // Seçilen satırları tutan state
   const [selectedRows, setSelectedRows] = useState([]);
-
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  const itemsPerPage = 2;
+  const [displayedTableData, setDisplayedTableData] = useState([]);
 
-
-  // Sayısal sütunların adlarını içeren dizi
   const numericColumns = ["price"];
+console.log(tableBody)
 
-  // Tabloyu belirtilen sütuna göre sıralayan fonksiyon
+  useEffect(() => {
+    updateDisplayedTableData();
+  }, [currentPage, tableData]);
+
   const sortTable = (columnName) => {
     const sortedData = [...tableData].sort((a, b) => {
       const valueA = isNumericColumn(columnName) ? a[columnName] : a[columnName].toLowerCase();
       const valueB = isNumericColumn(columnName) ? b[columnName] : b[columnName].toLowerCase();
-
-      if (valueA > valueB) {
-        return -1;
-      }
-      if (valueA < valueB) {
-        return 1;
-      }
-      return 0;
+      return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
     });
     setTableData(sortedData);
   };
 
-
-
-  // Tabloyu belirtilen sütuna göre ters sıralayan fonksiyon
   const reverseSortTable = (columnName) => {
     const sortedData = [...tableData].sort((a, b) => {
       const valueA = isNumericColumn(columnName) ? a[columnName] : a[columnName].toLowerCase();
       const valueB = isNumericColumn(columnName) ? b[columnName] : b[columnName].toLowerCase();
-
-      if (valueA < valueB) {
-        return -1;
-      }
-      if (valueA > valueB) {
-        return 1;
-      }
-      return 0;
+      return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
     });
     setTableData(sortedData);
   };
 
-  // Sıralama düzenini değiştiren ve tabloyu sıralayan fonksiyon
   const handleSort = (columnName) => {
     const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
     setSortOrder(newSortOrder);
 
-    // Artan veya azalan sıralama fonksiyonunu çağır
     if (newSortOrder === "asc") {
       sortTable(columnName);
     } else {
@@ -68,29 +50,30 @@ const Table = ({ search, setUserForm }) => {
     }
   };
 
-  // Sütunun sayısal olup olmadığını kontrol eden fonksiyon
   const isNumericColumn = (colName) => {
     return numericColumns.includes(colName);
   };
 
-  // Checkbox değişikliklerini izleyen fonksiyon
   const handleCheckboxChange = (index) => {
     if (selectedRows.includes(index)) {
-      // Seçili satırsa, listeden çıkar
       setSelectedRows(selectedRows.filter((rowIndex) => rowIndex !== index));
     } else {
-      // Seçili değilse, listeye ekle
       setSelectedRows([...selectedRows, index]);
     }
   };
 
-  // Seçilen satırları silen fonksiyon
   const handleDeleteSelected = () => {
-    const newTableData = tableData.filter((_, index) => !selectedRows.includes(index));
-    setTableData(newTableData);
+    const updatedTable = [...tableData];
+    const selectedIds = selectedRows.map(index => updatedTable[(currentPage - 1) * itemsPerPage + index]?.id).filter(Boolean);
     setSelectedRows([]);
+    
+    const newTableData = updatedTable.filter(item => !selectedIds.includes(item.id));
+    setTableData(newTableData);
+    updateDisplayedTableData();
   };
-const handleNextPage = () => {
+
+
+  const handleNextPage = () => {
     const totalPages = Math.ceil(tableData.length / itemsPerPage);
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -103,39 +86,58 @@ const handleNextPage = () => {
     }
   };
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const displayedTableData = tableData.slice(startIndex, endIndex);
+  const updateDisplayedTableData = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const updatedDisplayedTableData = tableData.slice(startIndex, endIndex);
+    setDisplayedTableData(updatedDisplayedTableData);
+  };
 
   return (
     <div className="">
       <button onClick={handleDeleteSelected}>Delete Selected Rows</button>
-      <table className="w-full">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="py-4 text-center px-2">
-              <input type="checkbox" onChange={() => setSelectedRows([])} />
-            </th>
-            {tableHead.map((thead, index) => (
-              <th className="py-4" key={index}>
-                <div className="flex items-center gap-5">
-                  {thead} <TbArrowsSort onClick={() => handleSort(thead.toLowerCase())} className="cursor-pointer" />
-                </div>
-              </th>
-            ))}
-            <th className="py-4 text-start w-[20%]"></th>
-          </tr>
-        </thead>
-        <Tabletd tableData={displayedTableData} search={search} setTableData={setTableData} setUserForm={setUserForm} selectedRows={selectedRows} handleCheckboxChange={handleCheckboxChange} />
-      </table>
+
+      <TransitionGroup component={null}>
+        <CSSTransition key={`page-${currentPage}`} timeout={300} classNames={styles}>
+          <table className="w-full">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="py-4 text-center px-2">
+                  <input type="checkbox" onChange={() => setSelectedRows([])} />
+                </th>
+                {tableHead.map((thead, index) => (
+                  <th className="py-4" key={index}>
+                    <div className="flex items-center gap-5">
+                      {thead} <TbArrowsSort onClick={() => handleSort(thead.toLowerCase())} className="cursor-pointer" />
+                    </div>
+                  </th>
+                ))}
+                <th className="py-4 text-start w-[20%]"></th>
+              </tr>
+            </thead>
+            <Tabletd
+              tableData={displayedTableData}
+              search={search}
+              setTableData={setTableData}
+              setUserForm={setUserForm}
+              selectedRows={selectedRows}
+              handleCheckboxChange={handleCheckboxChange}
+            />
+          </table>
+        </CSSTransition>
+      </TransitionGroup>
+
       <div className="flex justify-between mt-4">
-        <button onClick={handlePrevPage} className="cursor-pointer" disabled={currentPage === 1}>Önceki</button>
+        <button onClick={handlePrevPage} className="cursor-pointer" disabled={currentPage === 1}>
+          Önceki
+        </button>
         <span>Sayfa {currentPage}</span>
-        <button onClick={handleNextPage} className="cursor-pointer" disabled={endIndex >= tableData.length}>Sonraki</button>
+        <button onClick={handleNextPage} className="cursor-pointer" disabled={displayedTableData.length < itemsPerPage}>
+          Sonraki
+        </button>
       </div>
     </div>
   );
 };
-
 
 export default Table;
