@@ -1,37 +1,35 @@
 import Image from 'next/image';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import Button from './Button';
 
-const Tabletd = ({ tableData, setUserForm, setTableData, search }) => {
-  
-    const searchValue = search || '';
-  
-  
-    const filteredTableData = useMemo(() => {
-      const lowerCaseSearch = searchValue.trim().toLowerCase();
-      if (!lowerCaseSearch) {
-        return tableData;
-      }
-      return tableData.filter((table) =>
-        Object.values(table).some(
-          (value) =>
-            String(value).toLowerCase().includes(lowerCaseSearch)
-        )
-      );
-    }, [searchValue, tableData]);
-  
-    console.log('Filtered Table Data:', filteredTableData);
-  
+const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows, handleCheckboxChange }) => {
+  const searchValue = search || '';
+
+  // Filtrelenmiş tablo verilerini oluştur
+  const filteredTableData = useMemo(() => {
+    const lowerCaseSearch = searchValue.trim().toLowerCase();
+    if (!lowerCaseSearch) {
+      return tableData;
+    }
+    return tableData.filter((table) =>
+      Object.values(table).some(
+        (value) =>
+          String(value).toLowerCase().includes(lowerCaseSearch)
+      )
+    );
+  }, [searchValue, tableData]);
 
   return (
     <tbody className="">
       {filteredTableData.map((table, index) => (
-        <tr className="border-b-2" key={index}>
+        <tr className={selectedRows.includes(index) ? 'bg-gray-100' : 'hover:bg-gray-100'} key={index}>
           <td className="py-6 text-center">
-            <input type="checkbox" />
+            {/* Her satır için bir checkbox ekleyerek seçili satırları takip et */}
+            <input type="checkbox" checked={selectedRows.includes(index)} onChange={() => handleCheckboxChange(index)} />
           </td>
           <td>
             <div className="flex gap-2">
+              {/* Resim ve bilgileri gösteren kısım */}
               <Image width={43} height={33} className="rounded-full" src={table.img} alt={table.name} />
               <div>
                 <h1>{table.name} {table.lastName}</h1>
@@ -39,11 +37,13 @@ const Tabletd = ({ tableData, setUserForm, setTableData, search }) => {
               </div>
             </div>
           </td>
+          {/* Diğer tablo sütunları */}
           <td>{table.position}</td>
           <td>{table.country}</td>
           <td>{table.status}</td>
           <td>{table.price}</td>
           <td className="items-center gap-5">
+            {/* Düzenleme butonu */}
             <Button index={index} table={filteredTableData} setUserForm={setUserForm} action="edit" setTableData={setTableData} bg={"bg-addcolor mx-3"}>
               <div className="flex">
                 <svg className="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -53,6 +53,7 @@ const Tabletd = ({ tableData, setUserForm, setTableData, search }) => {
                 <span>Edit user</span>
               </div>
             </Button>
+            {/* Silme butonu */}
             <Button bg={"bg-red-600"} table={filteredTableData} action="delete" setTableData={setTableData} setUserForm={setUserForm}>
               Delete user
             </Button>

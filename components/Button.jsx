@@ -12,9 +12,10 @@ const Button = ({ children, bg, index, setTableData, table, action ,setUserForm}
       
     } else if (action === "edit") {
     setUserForm(true)
-   
-      
-    }
+        }
+        else if(action==="add"){
+          setUserForm(true)
+        }
   };
 
   return (
