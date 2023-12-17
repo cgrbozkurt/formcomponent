@@ -1,11 +1,10 @@
 import React from 'react';
 
-const Button = ({ children, bg, id, setTableData, tableData, action, setUserForm }) => {
+const Button = ({ children, bg, id, setTableData, action, setUserForm,newTableData }) => {
   const buttonHandler = () => {
     if (action === "delete") {
-      const selectedIds = [id]; // Silinecek öğenin benzersiz tanımlayıcısı id ise
-      const newTableData = tableData.filter(item => !selectedIds.includes(item.id));
-      setTableData(newTableData);
+      const newData = newTableData.filter(item => item.id !== id);
+      setTableData(newData);
     } else if (action === "edit") {
       setUserForm(true);
     } else if (action === "add") {
@@ -14,7 +13,7 @@ const Button = ({ children, bg, id, setTableData, tableData, action, setUserForm
   };
 
   return (
-    <button onClick={buttonHandler} className={`${bg} rounded-md px-2 py-1  text-white`}>
+    <button onClick={buttonHandler} className={`${bg} rounded-md px-2 py-1 text-white`}>
       {children}
     </button>
   );

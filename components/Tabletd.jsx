@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import Button from './Button';
 
-const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows, handleCheckboxChange }) => {
+const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows, handleCheckboxChange ,newTableData}) => {
   const searchValue = search || '';
 
   // Filtrelenmiş tablo verilerini oluştur
@@ -20,7 +20,8 @@ const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows, h
   }, [searchValue, tableData]);
 
   return (
-    <tbody className="">
+   
+  <tbody className="">
       {filteredTableData.map((table) => (
         <tr className={selectedRows.includes(table.id) ? 'bg-gray-100' : 'hover:bg-gray-100 border-b-2'} key={table.id}>
           <td className="py-6 text-center">
@@ -44,7 +45,7 @@ const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows, h
           <td>{table.price}</td>
           <td className="items-center gap-5">
             {/* Düzenleme butonu */}
-            <Button id={table.id} table={filteredTableData} setUserForm={setUserForm} action="edit" setTableData={setTableData} bg={"bg-addcolor mx-3"}>
+            <Button id={table.id}  setUserForm={setUserForm} action="edit" setTableData={setTableData} bg={"bg-addcolor mx-3"}>
               <div className="flex">
                 <svg className="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
@@ -54,7 +55,9 @@ const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows, h
               </div>
             </Button>
             {/* Silme butonu */}
-            <Button id={table.id} bg={"bg-red-600"} table={filteredTableData} tableData={tableData} action="delete" setTableData={setTableData} setUserForm={setUserForm}>
+            <Button id={table.id}
+            newTableData={newTableData}
+             bg={"bg-red-600"} table={filteredTableData} tableData={tableData} action="delete" setTableData={setTableData} setUserForm={setUserForm}>
               Delete user
             </Button>
           </td>

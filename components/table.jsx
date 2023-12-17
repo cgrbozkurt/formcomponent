@@ -9,7 +9,7 @@ const Table = ({ search, setUserForm }) => {
   const [tableData, setTableData] = useState(tableBody);
   const [selectedRows, setSelectedRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 5;
   const [displayedTableData, setDisplayedTableData] = useState([]);
 
   const numericColumns = ["price"];
@@ -51,23 +51,23 @@ const Table = ({ search, setUserForm }) => {
     return numericColumns.includes(colName);
   };
 
-  const handleCheckboxChange = (index) => {
-    if (selectedRows.includes(index)) {
-      setSelectedRows(selectedRows.filter((rowIndex) => rowIndex !== index));
+  const handleCheckboxChange = (id) => {
+    if (selectedRows.includes(id)) {
+      setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
     } else {
-      setSelectedRows([...selectedRows, index]);
+      setSelectedRows([...selectedRows, id]);
     }
   };
 
   const handleDeleteSelected = () => {
-    const updatedTable = [...tableData];
-    const selectedIds = selectedRows.map(index => updatedTable[(currentPage - 1) * itemsPerPage + index]?.id).filter(Boolean);
-    setSelectedRows([]);
-    
-    const newTableData = updatedTable.filter(item => !selectedIds.includes(item.id));
-    setTableData(newTableData);
-    updateDisplayedTableData();
-  };
+  const updatedTable = [...tableData];
+  const selectedIds = selectedRows.map(id => id).filter(Boolean);
+  setSelectedRows([]);
+
+  const newTableData = updatedTable.filter(item => !selectedIds.includes(item.id));
+  setTableData(newTableData);
+  updateDisplayedTableData();
+};
 
   const handleNextPage = () => {
     const totalPages = Math.ceil(tableData.length / itemsPerPage);
@@ -110,6 +110,7 @@ const Table = ({ search, setUserForm }) => {
             </tr>
           </thead>
           <Tabletd
+          newTableData={newTableData}
             tableData={displayedTableData}
             search={search}
             setTableData={setTableData}
