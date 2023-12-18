@@ -1,11 +1,16 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 import Button from './Button'
+import UserFormAdd from './UserFormAdd'
 
-const AllUsers = ({setSearch,setUserForm}) => {
+const AllUsers = ({setSearch,}) => {
+  const [userFormAdd,setUserFormAdd]=useState(false)
 
   return (
+
     <div className='alluser flex flex-col gap-5 px-5 my-7'>
+        {userFormAdd && <UserFormAdd setUserFormAdd={setUserFormAdd}   />}
+
         <div className='top flex'>
         <Link href={"#"} className="titles flex">
         <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
@@ -26,7 +31,7 @@ className='border bg-gray-50  w-96 border-gray-300 focus:border-cyan-600 rounded
 </div>
 <div className='btn flex gap-5'>
 
-<Button setUserForm={setUserForm}  action={"add"}
+<Button setUserFormAdd={setUserFormAdd}  action={"add"}
  bg="bg-addcolor flex px-2 py-2 "><svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
 </svg> Add User</Button>
 

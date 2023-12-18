@@ -8,7 +8,7 @@ const handleDelete=()=>{
     handleDeleteSelected()
     setConfirm(false)
   }
-  else if (action === "deleteselected") {
+  else if (action === "delete") {
     const newItem = tableData.filter((item) => item.id !== id);
     setTableData(newItem);
     setConfirm(false);
@@ -19,12 +19,12 @@ const handleDelete=()=>{
   return (
     <>
       {confirm && (
-        <div className='absolute w-[25%] h-[25%] left-[37.5%] top-[25%] bg-white border-2 flex flex-col justify-around '>
-          <p className='text-center mt-5'>Silmek İstediğinizden Emin misiniz ?</p>
+        <div className='absolute w-[25%] h-[25%] left-[37.5%] top-[25%] rounded-xl p-2 border-2 border-addcolor bg-white  flex flex-col justify-around '>
+          <p className='text-center mt-5 text-addcolor font-semibold'>Silmek İstediğinizden Emin misiniz ?</p>
           <button
             onClick={() => setConfirm(false)}
             className='absolute right-2 top-2 rounded-full border-2 w-7 h-7 text-center transition-all duration-300
-         items-center hover:bg-white hover:text-red-600 flex justify-center bg-red-600 text-white'
+         items-center hover:bg-addcolor hover:text-white flex justify-center bg-white text-addcolor'
           >
             <svg
               className='w-5 h-5 cursor-pointer '

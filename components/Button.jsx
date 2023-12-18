@@ -1,7 +1,7 @@
 // Button.jsx
 import React from 'react';
 
-const Button = ({ children, bg,action, setUserForm,setConfirm}) => {
+const Button = ({ children, bg,action, setUserForm,setConfirm,setUserFormAdd}) => {
   const buttonHandler = () => {
     if (action === "delete") {
       
@@ -10,7 +10,7 @@ const Button = ({ children, bg,action, setUserForm,setConfirm}) => {
     } else if (action === "edit") {
       setUserForm(true);
     } else if (action === "add") {
-      setUserForm(true);
+      setUserFormAdd(true);
     }
     else if(action==="hayir"){
       setConfirm(false)

@@ -11,7 +11,7 @@ const Table = ({ search, setUserForm }) => {
   const [tableData, setTableData] = useState(tableBody); // Tablo verisi
   const [selectedRows, setSelectedRows] = useState([]); // Seçili satırlar
   const [currentPage, setCurrentPage] = useState(1); // Mevcut sayfa numarası
-  const itemsPerPage = 3; // Sayfa başına gösterilecek öğe sayısı
+  const itemsPerPage = 5; // Sayfa başına gösterilecek öğe sayısı
   const [displayedTableData, setDisplayedTableData] = useState([]); // Sayfa numarasına göre filtrelenmiş görünen tablo verisi
 
   const numericColumns = ["price"]; // Sayısal değer içeren sütunlar
