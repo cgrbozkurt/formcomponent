@@ -11,7 +11,7 @@ const Table = ({ search, setUserForm }) => {
   const [tableData, setTableData] = useState(tableBody); // Tablo verisi
   const [selectedRows, setSelectedRows] = useState([]); // Seçili satırlar
   const [currentPage, setCurrentPage] = useState(1); // Mevcut sayfa numarası
-  const itemsPerPage = 5; // Sayfa başına gösterilecek öğe sayısı
+  const itemsPerPage = 3; // Sayfa başına gösterilecek öğe sayısı
   const [displayedTableData, setDisplayedTableData] = useState([]); // Sayfa numarasına göre filtrelenmiş görünen tablo verisi
 
   const numericColumns = ["price"]; // Sayısal değer içeren sütunlar
@@ -106,14 +106,16 @@ const Table = ({ search, setUserForm }) => {
   const [confirm,setConfirm]=useState(false)
 
   return (
-    <div>
-<button onClick={() => selectedRows.length > 0 && setConfirm(true)}>Delete Selected Rows</button>
-      <Deleteconfirmation confirm={confirm} setConfirm={setConfirm} handleDeleteSelected={handleDeleteSelected} /> {/* Silme işlemi onayı bileşeni */}
-      <table className="w-full transition-all duration-1000">
+    <div className="">
+      <Deleteconfirmation action="deletelist" confirm={confirm} setConfirm={setConfirm} handleDeleteSelected={handleDeleteSelected} /> {/* Silme işlemi onayı bileşeni */}
+      <table className="w-full transition-all duration-1000 overflow-x-auto">
         <thead className="bg-gray-100">
           <tr>
             <th className="py-4 text-center px-2">
-              <input type="checkbox" onChange={() => setSelectedRows([])} />
+<button className=" text-black hover:opacity-80 px-2 py-1 rounded-lg " onClick={() => selectedRows.length > 0 && setConfirm(true)}>
+<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+</button>
+              
             </th>
             {tableHead.map((thead, index) => (
               <th className="py-4" key={index}>
@@ -142,7 +144,7 @@ const Table = ({ search, setUserForm }) => {
         <button onClick={handlePrevPage} className="cursor-pointer" disabled={currentPage === 1}>
           Önceki
         </button>
-        <span>Sayfa {currentPage}</span>
+        <span>Showing  {currentPage*3-2}-{currentPage*3} of {tableData.length} </span>
         <button onClick={handleNextPage} className="cursor-pointer" disabled={displayedTableData.length < itemsPerPage}>
           Sonraki
         </button>

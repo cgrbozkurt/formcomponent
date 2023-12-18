@@ -1,7 +1,7 @@
 // Button.jsx
 import React from 'react';
 
-const Button = ({ children, bg, id, setTableData, tableData, action, setUserForm,setConfirm,handleDeleteSelected}) => {
+const Button = ({ children, bg,action, setUserForm,setConfirm}) => {
   const buttonHandler = () => {
     if (action === "delete") {
       
@@ -12,17 +12,14 @@ const Button = ({ children, bg, id, setTableData, tableData, action, setUserForm
     } else if (action === "add") {
       setUserForm(true);
     }
-    else if(action==="hayır"){
+    else if(action==="hayir"){
       setConfirm(false)
     }
-    else if(action==="evet"){
-      handleDeleteSelected()
-      setConfirm(false)
-    }
+  
   };
 
   return (
-    <button onClick={buttonHandler} className={`${bg} rounded-md px-2 py-1 text-white`}>
+    <button onClick={buttonHandler} className={`${bg} rounded-md px-2 py-1 hover:opacity-80   text-white`}>
       {children}
     </button>
   );

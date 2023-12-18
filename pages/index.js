@@ -19,7 +19,7 @@ export default function Home() {
         };
 
   return (
-    <div className='ml-60 mt-60 mr-20 border-2'>
+    <div className='ml-60 mt-60 mr-20 border-2 w-[1349px]'>
         {userForm && <UserForm setUserForm={setUserForm}  onSubmit={onSubmit} />}
 
     <AllUsers setUserForm={setUserForm} setSearch={setSearch} />
