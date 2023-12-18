@@ -54,7 +54,7 @@ const UserForm = ({ setUserForm }) => {
       </div>
 
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-        <Form className="grid grid-cols-2 gap-5 place-content-center">
+        <Form className="grid grid-cols-2 gap-5 items-center">
           <div>
             <label htmlFor="firstName">First Name</label>
             <Field type="text" id="firstName" name="firstName" className={inputClasses} />
@@ -103,9 +103,9 @@ const UserForm = ({ setUserForm }) => {
             <ErrorMessage name="newPassword" component="div" />
           </div>
 
-          <button className="bg-addcolor" type="submit">
+        <div className=" text-center col-span-2 rounded-full ">  <button className="bg-addcolor rounded-full px-3 py-1" type="submit">
             Add new user
-          </button>
+          </button></div>
         </Form>
       </Formik>
     </div>

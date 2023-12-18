@@ -1,19 +1,23 @@
 // Button.jsx
 import React from 'react';
 
-const Button = ({ children, bg, id, setTableData, tableData, action, setUserForm,setDisplayedTableData,updateDisplayedTableData }) => {
+const Button = ({ children, bg, id, setTableData, tableData, action, setUserForm,setConfirm,handleDeleteSelected}) => {
   const buttonHandler = () => {
     if (action === "delete") {
-      const selectedIds = [id]; // Silinecek öğenin benzersiz tanımlayıcısı id ise
-      const newData = tableData.filter(item => !selectedIds.includes(item.id));
-      setTableData(newData)
-           setDisplayedTableData();
-           updateDisplayedTableData()
+      
+      setConfirm(true)
 
     } else if (action === "edit") {
       setUserForm(true);
     } else if (action === "add") {
       setUserForm(true);
+    }
+    else if(action==="hayır"){
+      setConfirm(false)
+    }
+    else if(action==="evet"){
+      handleDeleteSelected()
+      setConfirm(false)
     }
   };
 

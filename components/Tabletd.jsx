@@ -2,8 +2,9 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
 import Button from './Button';
+import Deleteconfirmation from './Deleteconfirmation';
 
-const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows, handleCheckboxChange,setDisplayedTableData,updateDisplayedTableData }) => {
+const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows,setConfirm,handleCheckboxChange }) => {
   const searchValue = search || '';
 
   // Filtrelenmiş tablo verilerini oluştur
@@ -45,7 +46,7 @@ const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows, h
           <td>{table.price}</td>
           <td className="items-center gap-5">
             {/* Edit User butonu */}
-            <Button id={table.id} setUserForm={setUserForm} action="edit" setTableData={setTableData} bg={"bg-addcolor mx-3"}>
+            <Button setConfirm={setConfirm} id={table.id} setUserForm={setUserForm} action="edit" setTableData={setTableData} bg={"bg-addcolor mx-3"}>
               <div className="flex">
                 <svg className="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
@@ -55,9 +56,9 @@ const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows, h
               </div>
             </Button >
             {/* Silme butonu */}
-            <Button id={table.id} bg={"bg-red-600"} table={filteredTableData} tableData={tableData} action="delete"
-           updateDisplayedTableData={updateDisplayedTableData} setDisplayedTableData={setDisplayedTableData} setTableData={setTableData} setUserForm={setUserForm}>
-              Delete user
+            <Button id={table.id} bg={"bg-red-600"} table={filteredTableData} tableData={tableData} setConfirm={setConfirm} action="delete"
+            setTableData={setTableData} setUserForm={setUserForm}> 
+              Delete user <Deleteconfirmation/>
             </Button>
           </td>
         </tr>

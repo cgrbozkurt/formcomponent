@@ -58,14 +58,6 @@ const Table = ({ search, setUserForm }) => {
     return numericColumns.includes(colName);
   };
 
-  // Checkbox değiştiğinde çalışan fonksiyon
-  const handleCheckboxChange = (id) => {
-    if (selectedRows.includes(id)) {
-      setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
-    } else {
-      setSelectedRows([...selectedRows, id]);
-    }
-  };
 
   // Seçili satırları silen fonksiyon
   const handleDeleteSelected = () => {
@@ -77,6 +69,16 @@ const Table = ({ search, setUserForm }) => {
     setTableData(newTableData);
     updateDisplayedTableData(); // Sayfa numarasına göre güncellenmiş tabloyu göster
   };
+
+    // Checkbox değiştiğinde çalışan fonksiyon
+    const handleCheckboxChange = (id) => {
+      if (selectedRows.includes(id)) {
+        setSelectedRows(selectedRows.filter((rowId) => rowId !== id));
+      } else {
+        setSelectedRows([...selectedRows, id]);
+      }
+    };
+  
 
   // Sonraki sayfayı gösteren fonksiyon
   const handleNextPage = () => {
@@ -101,10 +103,12 @@ const Table = ({ search, setUserForm }) => {
     setDisplayedTableData(updatedDisplayedTableData);
   };
 
+  const [confirm,setConfirm]=useState(false)
+
   return (
     <div>
-      <button onClick={handleDeleteSelected}>Delete Selected Rows</button>
-      <Deleteconfirmation/> {/* Silme işlemi onayı bileşeni */}
+<button onClick={() => selectedRows.length > 0 && setConfirm(true)}>Delete Selected Rows</button>
+      <Deleteconfirmation confirm={confirm} setConfirm={setConfirm} handleDeleteSelected={handleDeleteSelected} /> {/* Silme işlemi onayı bileşeni */}
       <table className="w-full transition-all duration-1000">
         <thead className="bg-gray-100">
           <tr>
@@ -124,6 +128,7 @@ const Table = ({ search, setUserForm }) => {
         <Tabletd
         updateDisplayedTableData={updateDisplayedTableData}
         setDisplayedTableData={setDisplayedTableData}
+        setConfirm={setConfirm}
           tableData={displayedTableData}
           search={search}
           setTableData={setTableData}
