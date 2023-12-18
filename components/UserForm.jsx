@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-const UserForm = ({ setUserForm },title) => {
+const UserForm = ({ setUserForm }) => {
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -28,7 +28,7 @@ const UserForm = ({ setUserForm },title) => {
   const inputClasses =
     "shadow-sm bg-gray-50 border border-gray-300 focus:border-cyan-600 rounded-md text-gray-900 focus:ring-cyan-600  p-2 mb-4 w-full";
 
-  const onSubmit = (values, { resetForm },title) => {
+  const onSubmit = (values, { resetForm }) => {
     console.log("Form Gönderildi", values);
     resetForm();
     setUserForm(false); // Form gönderildikten sonra formu kapat
@@ -37,7 +37,7 @@ const UserForm = ({ setUserForm },title) => {
   return (
     <div className="bg-white gap-5 w-[40%]  border-2 p-5 absolute top-10 left-[30%] ">
       <div className="flex justify-between">
-        <h1 className="mb-5">{title} </h1>
+        <h1 className="mb-5"> Edit User</h1>
         <svg
           className="w-5 h-5 cursor-pointer"
           onClick={() => setUserForm(false)}

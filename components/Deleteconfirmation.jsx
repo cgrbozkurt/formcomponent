@@ -1,22 +1,20 @@
-// Deleteconfirmation.jsx
-
-import React, { useState } from 'react';
+import React from 'react';
 import Button from './Button';
 
-const Deleteconfirmation = ({ confirm, setConfirm, handleDeleteSelected, setTableData, tableData, id }) => {
-  const [confirmationAction, setConfirmationAction] = useState(null);
+const Deleteconfirmation = ({ confirm, setConfirm, handleDeleteSelected,action,setTableData,tableData,id }) => {
 
-  const handleDelete = () => {
-    if (confirmationAction === "deletelist") {
-      handleDeleteSelected();
-      setConfirm(false);
-    } else if (confirmationAction === "deleteselected") {
-      const updatedTableData = tableData.filter((item) => item.id !== id);
-      setTableData(updatedTableData);
-      setConfirm(false);
-      console.log("çalıştı");
-    }
-  };
+const handleDelete=()=>{
+  if(action==="deletelist"){
+    handleDeleteSelected()
+    setConfirm(false)
+  }
+  else if (action === "deleteselected") {
+    const newItem = tableData.filter((item) => item.id !== id);
+    setTableData(newItem);
+    setConfirm(false);
+    console.log("çalıştı")
+  }
+}
 
   return (
     <>
@@ -37,18 +35,16 @@ const Deleteconfirmation = ({ confirm, setConfirm, handleDeleteSelected, setTabl
               <path
                 fillRule='evenodd'
                 d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                clipRule='evenodd'
               ></path>
             </svg>
           </button>
           <div className='relative w-full h-full flex justify-around items-center'>
-            <button onClick={handleDelete} className='bg-addcolor text-white py-1 hover:opacity-80 w-[25%] rounded-lg'>
+            <button onClick={handleDelete} className='bg-addcolor text-white py-1 hover:opacity-90 w-[25%] rounded-lg'>
               Evet
             </button>
-            <Button
-              action='hayir'
-              setConfirm={setConfirm}
-              bg={'bg-white text-addcolor border-2 border-addcolor hover:opacity-80 font-semibold  w-[25%]  '}
-            >
+            <Button action='hayir' setConfirm={setConfirm} 
+            bg={'bg-white !text-addcolor border-2 border-addcolor hover:opacity-90 font-semibold  w-[25%]  '}>
               Hayır
             </Button>
           </div>

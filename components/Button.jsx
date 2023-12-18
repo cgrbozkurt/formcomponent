@@ -19,7 +19,7 @@ const Button = ({ children, bg,action, setUserForm,setConfirm}) => {
   };
 
   return (
-    <button onClick={buttonHandler} className={`${bg} rounded-md px-2 py-1 hover:opacity-80   text-white`}>
+    <button onClick={buttonHandler} className={`${bg} rounded-md px-2 py-1 hover:opacity-80 text-white`}>
       {children}
     </button>
   );
