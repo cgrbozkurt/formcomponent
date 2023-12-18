@@ -30,6 +30,7 @@ const UserForm = ({ setUserForm }) => {
 
   const onSubmit = (values, { resetForm }) => {
     console.log("Form Gönderildi", values);
+    console.log(values)
     resetForm();
     setUserForm(false); // Form gönderildikten sonra formu kapat
   };
