@@ -2,8 +2,7 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
 import Button from './Button';
-import Deleteconfirmation from './Deleteconfirmation';
-import UserForm from './UserForm';
+
 
 const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows,setConfirm,handleCheckboxChange }) => {
   const searchValue = search || '';
@@ -25,7 +24,7 @@ const Tabletd = ({ tableData, setUserForm, setTableData, search, selectedRows,se
   return (
     <tbody className="overflow-x-auto ">
       {filteredTableData.map((table) => (
-        <tr className={selectedRows.includes(table.id) ? 'bg-gray-100' : 'hover:bg-gray-100 border-b-2'} key={table.id}>
+        <tr className={selectedRows.includes(table.id) ? 'bg-gray-100' : 'hover:bg-gray-100 border-b-2 hover:text-addcolor font-semibold '} key={table.id}>
           <td className="py-6 text-center">
             {/* Her satır için bir checkbox ekleyerek seçili satırları takip et */}
             <input type="checkbox" checked={selectedRows.includes(table.id)} onChange={() => handleCheckboxChange(table.id)} />

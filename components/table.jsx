@@ -140,7 +140,7 @@ const Table = ({ search, setUserForm }) => {
         />
       </table>
 
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-between mt-4 items-center text-center py-2">
         <button onClick={handlePrevPage} className="cursor-pointer" disabled={currentPage === 1}>
           Önceki
         </button>
