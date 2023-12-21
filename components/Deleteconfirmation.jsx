@@ -1,18 +1,19 @@
 import React from 'react';
 import Button from './Button';
 
-const Deleteconfirmation = ({ confirm, setConfirm, handleDeleteSelected,action,setTableData,tableData,id }) => {
+const Deleteconfirmation = ({ confirm, setConfirm, handleDeleteSelected,setTableData,tableData,id,deleteID,setDeleteId }) => {
 
 const handleDelete=()=>{
-  if(action==="deletelist"){
+  if(deleteID===true){
+    console.log("çalıştı")
+setDeleteId(false);
+   
+  }
+  else {
+   
     handleDeleteSelected()
     setConfirm(false)
-  }
-  else if (action === "delete") {
-    const newItem = tableData.filter((item) => item.id !== id);
-    setTableData(newItem);
-    setConfirm(false);
-    console.log("çalıştı")
+    console.log("dts")
   }
 }
 

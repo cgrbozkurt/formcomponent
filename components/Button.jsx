@@ -1,11 +1,11 @@
 // Button.jsx
 import React from 'react';
 
-const Button = ({ children, bg,action, setUserForm,setConfirm,setUserFormAdd}) => {
+const Button = ({ children, bg,action, setUserForm,setConfirm,setUserFormAdd,setDeleteId}) => {
   const buttonHandler = () => {
     if (action === "delete") {
-      
-      setConfirm(true)
+      setConfirm(true);
+      setDeleteId(true)
 
     } else if (action === "edit") {
       setUserForm(true);
