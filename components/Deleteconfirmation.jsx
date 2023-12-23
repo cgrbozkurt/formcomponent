@@ -1,26 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from './Button';
 
-const Deleteconfirmation = ({ confirm, setConfirm, handleDeleteSelected,setTableData,tableData,id,deleteID,setDeleteId }) => {
+const Deleteconfirmation = ({ confirm, setConfirm, handleDeleteSelected, setTableData, tableData, id, deleteID, setDeleteId }) => {
+  const [isVisible, setIsVisible] = useState(confirm);
 
-const handleDelete=()=>{
-  if(deleteID===true){
-    console.log("çalıştı")
-setDeleteId(false);
-   
-  }
-  else {
-   
-    handleDeleteSelected()
-    setConfirm(false)
-    console.log("dts")
-  }
-}
+  useEffect(() => {
+    setIsVisible(confirm);
+  }, [confirm]);
+
+  const handleDelete = () => {
+    if (deleteID === true) {
+      console.log('çalıştı');
+      setDeleteId(false);
+    } else {
+      handleDeleteSelected();
+      setConfirm(false);
+      console.log('dts');
+    }
+  };
 
   return (
     <>
-      {confirm && (
-        <div className='absolute w-[25%] h-[25%] left-[37.5%] top-[25%] rounded-xl p-2 border-2 border-addcolor bg-white  flex flex-col justify-around '>
+      {isVisible && (
+        <div
+          className={`absolute w-[25%] h-[25%] left-[37.5%] top-[25%] rounded-xl p-2 border-2 border-addcolor bg-white  flex flex-col justify-around transition-all duration-300`}
+        >
           <p className='text-center mt-5 text-addcolor font-semibold'>Silmek İstediğinizden Emin misiniz ?</p>
           <button
             onClick={() => setConfirm(false)}
@@ -44,8 +48,11 @@ setDeleteId(false);
             <button onClick={handleDelete} className='bg-addcolor text-white py-1 hover:opacity-90 w-[25%] rounded-lg'>
               Evet
             </button>
-            <Button action='hayir' setConfirm={setConfirm} 
-            bg={'bg-white !text-addcolor border-2 border-addcolor hover:opacity-90 font-semibold  w-[25%]  '}>
+            <Button
+              action='hayir'
+              setConfirm={setConfirm}
+              bg={'bg-white !text-addcolor border-2 border-addcolor hover:opacity-90 font-semibold  w-[25%]  '}
+            >
               Hayır
             </Button>
           </div>
